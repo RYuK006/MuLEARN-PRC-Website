@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MuLearn PRC - Execom Members</title>
+  <meta name="description" content="Meet the passionate team of 19 members building a vibrant learning community at Providence College of Engineering. Check out the Karma Leaderboard!">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css?v=4">
+  
+  <!-- GSAP & ScrollTrigger -->
+  <script src="gsap.min.js"></script>
+  <script src="ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- Full Page Scrubbing Canvas -->
+  <div class="canvas-background-container">
+    <video id="scrollVideo" class="scroll-canvas" muted playsinline preload="auto"></video>
+    <div class="video-overlay"></div>
+  </div>
+
+  <!-- Dynamic Background Blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <!-- Header Section -->
+  <header class="navbar-header">
+    <div class="navbar-container">
+      <a href="#" class="brand-logo-container">
+        <!-- Logo Image -->
+        <img src="assets/logo.png" alt="MuLearn Logo" class="brand-logo" width="40" height="40" style="border-radius: 10px; object-fit: contain;">
+        <div class="brand-text">
+          <span class="brand-name">MuLearn PRC</span>
+          <span class="brand-tagline">Learn &bull; Collaborate &bull; Grow</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="nav-links">
+        <a href="#home" class="nav-item active">Home</a>
+        <a href="#execom" class="nav-item">Execom</a>
+        <a href="#karma" class="nav-item">Karma Leaderboard</a>
+        <a href="#events" class="nav-item">Events</a>
+        <a href="#gallery" class="nav-item">Gallery</a>
+        <a href="#about" class="nav-item">About</a>
+        <a href="#contact" class="nav-item">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
+          <span class="theme-icon"></span>
+        </button>
+        <a href="https://mulearn.org" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-join">Join MuLearn</a>
+        
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-btn" aria-label="Toggle navigation menu" id="mobileMenuToggle">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <div class="mobile-drawer-header">
+        <span class="brand-name">MuLearn PRC</span>
+        <button class="mobile-close-btn" id="mobileCloseBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <nav class="mobile-nav-links">
+        <a href="#home" class="mobile-nav-item active">Home</a>
+        <a href="#execom" class="mobile-nav-item">Execom</a>
+        <a href="#karma" class="mobile-nav-item">Karma Leaderboard</a>
+        <a href="#events" class="mobile-nav-item">Events</a>
+        <a href="#gallery" class="mobile-nav-item">Gallery</a>
+        <a href="#about" class="mobile-nav-item">About</a>
+        <a href="#contact" class="mobile-nav-item">Contact</a>
+        <button class="theme-toggle-btn mobile-theme-btn" id="mobileThemeToggle" aria-label="Toggle Theme">
+          <span class="theme-icon">🌙</span> Dark Mode
+        </button>
+        <a href="https://mulearn.org" target="_blank" rel="noopener" class="btn btn-primary btn-join-mobile">Join MuLearn</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+      <div class="hero-container">
+        
+        <!-- Hero Text -->
+        <div class="hero-text-content">
+          <div class="hero-badge">
+            <span>TOGETHER WE GROW</span>
+            <span class="heart-icon">&hearts;</span>
+          </div>
+          <h1 class="hero-heading">
+            MuLearn PRC <br>
+            <span class="highlight">Execom Members</span>
+          </h1>
+          <p class="hero-subtext">
+            A passionate team of <span id="hero-member-count">19</span> members working together to build a vibrant learning community at Providence College of Engineering.
+          </p>
+          <div class="hero-ctas">
+            <a href="#execom" class="btn btn-primary">
+              Meet the Team
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="#events" class="btn btn-secondary">Explore Events</a>
+          </div>
+          <div class="hero-socials">
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="social-icon-btn" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-icon-btn" aria-label="LinkedIn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+            <a href="mailto:info@mulearn.org" class="social-icon-btn" aria-label="Email">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Image Frame -->
+        <div class="hero-image-wrapper">
+          <!-- Decorative Dots Pattern Grid -->
+          <div class="dots-grid dots-top"></div>
+          <div class="dots-grid dots-bottom"></div>
+          
+          <!-- Decorative Sparkles -->
+          <div class="sparkle sparkle-1">✦</div>
+          <div class="sparkle sparkle-2">✦</div>
+          <div class="sparkle sparkle-3">✦</div>
+          
+          <!-- Image mask container -->
+          <div class="blob-frame-container">
+            <img src="assets/hero_team.png" alt="MuLearn PRC Execom Members Group Photo" class="team-group-img" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1000'">
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Manifesto Section -->
+    <section class="manifesto-section">
+      <div class="manifesto-container">
+        <h2 class="manifesto-text">We are the architects of tomorrow, building a vibrant ecosystem where curiosity meets innovation.</h2>
+      </div>
+    </section>
+
+    <!-- Stats Bar Section -->
+    <section class="stats-bar-section">
+      <div class="stats-container">
+        <div class="stat-item">
+          <span class="stat-number" id="stats-member-count">19</span>
+          <span class="stat-label">Members</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">15+</span>
+          <span class="stat-label">Events Run</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">24K</span>
+          <span class="stat-label">Total Karma</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">8</span>
+          <span class="stat-label">Projects Shipped</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Dashboard Section (Execom + Leaderboard) -->
+    <section class="dashboard-section" id="execom">
+      <div class="dashboard-grid">
+        
+        <!-- Left Side: Execom Grid -->
+        <div class="execom-column">
+          <div class="column-header">
+            <h2 class="column-title">Execom Members</h2>
+          </div>
+
+          <div class="execom-cards-grid" id="execom-cards-container">
+            <!-- Cards will be dynamically injected here via execom.js -->
+          </div>
+        </div>
+
+        <!-- Right Side: Leaderboard Column -->
+        <div class="leaderboard-column" id="karma">
+          <div class="leaderboard-card">
+            
+            <div class="leaderboard-header">
+              <h2 class="column-title">Karma Leaderboard</h2>
+
+            </div>
+
+            <div class="leaderboard-table-wrapper">
+              <table class="leaderboard-table">
+                <thead>
+                  <tr>
+                    <th class="col-rank">Rank</th>
+                    <th class="col-member">Member</th>
+                    <th class="col-muid">MuID</th>
+                    <th class="col-points">Karma Points</th>
+                  </tr>
+                </thead>
+                <tbody id="leaderboard-body">
+                  <!-- JS injected rows -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- View Full Leaderboard Footer Button -->
+
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+  <!-- Timeline Section -->
+  <section class="dashboard-section" id="timeline">
+    <div style="text-align: center; margin-bottom: 32px;">
+      <h2 class="column-title" style="display: inline-block;">Our Journey</h2>
+    </div>
+    <div class="timeline-container">
+      <div class="timeline-track">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3 class="timeline-date">2022</h3>
+          <p class="timeline-desc">MuLearn PRC Chapter Founded</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3 class="timeline-date">2023</h3>
+          <p class="timeline-desc">First Bootcamp & Hackathon</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3 class="timeline-date">2024</h3>
+          <p class="timeline-desc">Crossed 10,000 Karma Points</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3 class="timeline-date">2025</h3>
+          <p class="timeline-desc">Execom Expanded & New Initiatives</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events Section -->
+  <section class="dashboard-section" id="events">
+    <div style="text-align: center; margin-bottom: 32px;">
+      <h2 class="column-title" style="display: inline-block;">Events</h2>
+    </div>
+    
+    <div class="scrolling-wrapper">
+      <div class="scrolling-track" style="align-items: center;">
+        <!-- Original Set -->
+        <div class="photo-col col-lg">
+          <div class="photo-frame">Add Photo</div>
+        </div>
+        <div class="photo-col col-md">
+          <div class="photo-frame">Add Photo</div>
+          <div class="photo-frame">Add Photo</div>
+        </div>
+        <div class="photo-col col-sm">
+          <div class="photo-frame" style="flex: 1;">Add Photo</div>
+          <div class="photo-frame" style="flex: 2;">Add Photo</div>
+        </div>
+        <div class="photo-col col-lg">
+          <div class="photo-frame" style="flex: 2;">Add Photo</div>
+          <div class="photo-row" style="flex: 1;">
+            <div class="photo-frame">Add Photo</div>
+            <div class="photo-frame">Add Photo</div>
+          </div>
+        </div>
+        <div class="photo-col col-sm">
+          <div class="photo-frame">Add Photo</div>
+          <div class="photo-frame">Add Photo</div>
+          <div class="photo-frame">Add Photo</div>
+        </div>
+        
+        <!-- Duplicated Set for Infinite Scroll -->
+        <div class="photo-col col-lg">
+          <div class="photo-frame">Add Photo</div>
+        </div>
+        <div class="photo-col col-md">
+          <div class="photo-frame">Add Photo</div>
+          <div class="photo-frame">Add Photo</div>
+        </div>
+        <div class="photo-col col-sm">
+          <div class="photo-frame" style="flex: 1;">Add Photo</div>
+          <div class="photo-frame" style="flex: 2;">Add Photo</div>
+        </div>
+        <div class="photo-col col-lg">
+          <div class="photo-frame" style="flex: 2;">Add Photo</div>
+          <div class="photo-row" style="flex: 1;">
+            <div class="photo-frame">Add Photo</div>
+            <div class="photo-frame">Add Photo</div>
+          </div>
+        </div>
+        <div class="photo-col col-sm">
+          <div class="photo-frame">Add Photo</div>
+          <div class="photo-frame">Add Photo</div>
+          <div class="photo-frame">Add Photo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Voices Section -->
+  <section class="dashboard-section" id="voices">
+    <div style="text-align: center; margin-bottom: 32px;">
+      <h2 class="column-title" style="display: inline-block;">Community Voices</h2>
+    </div>
+    <div class="voices-grid">
+      <div class="voice-card">
+        <p class="voice-quote">"MuLearn PRC transformed how I approach building projects. The community is incredibly supportive."</p>
+        <span class="voice-author">- Rahul S.</span>
+      </div>
+      <div class="voice-card">
+        <p class="voice-quote">"A place where curiosity is actually rewarded. I've learned more here than in a classroom."</p>
+        <span class="voice-author">- Sneha M.</span>
+      </div>
+      <div class="voice-card">
+        <p class="voice-quote">"The hackathons pushed me to my limits. Proud to be part of this amazing journey."</p>
+        <span class="voice-author">- David K.</span>
+      </div>
+      <div class="voice-card">
+        <p class="voice-quote">"It's not just about coding, it's about building a network of like-minded innovators."</p>
+        <span class="voice-author">- Priya A.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="dashboard-section" id="gallery">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <h2 class="column-title" style="display: inline-block;">Gallery</h2>
+    </div>
+    <div id="dynamic-gallery">
+      <!-- Gallery images will be injected here by gallery.js -->
+    </div>
+  </section>
+
+  <!-- Expand About Section -->
+  <section class="dashboard-section" id="about">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <h2 class="column-title" style="display: inline-block;">About Us</h2>
+    </div>
+    <div class="about-pillars-grid">
+      <div class="pillar-card">
+        <h3 class="pillar-title">LEARN</h3>
+        <p class="pillar-desc">Continuous learning through workshops, study groups, and hands-on technical sessions.</p>
+      </div>
+      <div class="pillar-card">
+        <h3 class="pillar-title">BUILD</h3>
+        <p class="pillar-desc">Applying knowledge by shipping real-world projects, participating in hackathons, and solving problems.</p>
+      </div>
+      <div class="pillar-card">
+        <h3 class="pillar-title">SHARE</h3>
+        <p class="pillar-desc">Giving back to the community by mentoring, writing technical blogs, and speaking at events.</p>
+      </div>
+      <div class="pillar-card">
+        <h3 class="pillar-title">CONNECT</h3>
+        <p class="pillar-desc">Networking with industry professionals, alumni, and peers to foster lifelong professional relationships.</p>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Join CTA Section -->
+  <section class="dashboard-section join-cta-section">
+    <div class="join-cta-container">
+      <h2 class="join-cta-title">Ready to shape the future?</h2>
+      <p class="join-cta-desc">Join MuLearn PRC today and start your journey of continuous learning and building.</p>
+      <a href="https://mulearn.org" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">Join the Community</a>
+      <p class="join-cta-note">Next onboarding event: September 15th, 2026</p>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>MuLearn PRC</h3>
+          <p>Built to learn, collaborate, and grow.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <a href="#home">Home</a>
+          <a href="#execom">Execom</a>
+          <a href="#events">Events</a>
+          <a href="#about">About</a>
+        </div>
+        <div class="footer-social">
+          <h4>Connect</h4>
+          <div class="social-icons-row">
+            <a href="#" class="social-icon-btn">Ig</a>
+            <a href="#" class="social-icon-btn">Li</a>
+            <a href="#" class="social-icon-btn">Em</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 MuLearn PRC. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PapaParse for CSV parsing -->
+  <script src="papaparse.min.js"></script>
+  <script src="app.js?v=4"></script>
+  <script src="leaderboard.js?v=4"></script>
+  <script src="execom.js?v=4"></script>
+  <script src="gallery.js?v=2"></script>
+</body>
+</html>
