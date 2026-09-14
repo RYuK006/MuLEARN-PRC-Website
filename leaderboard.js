@@ -21,16 +21,22 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderLeaderboard(data) {
     if (!leaderboardBody) return;
 
+    let totalKarma = 0;
+
     // Filter and transform data
     let students = data
       .filter(row => row.rank && !isNaN(parseInt(row.rank))) // Ensure valid rank
-      .map(row => ({
-        fullName: row.full_name || 'Unknown',
-        muid: row.muid || '-',
-        karma: parseInt(row.karma) || 0,
-        rank: parseInt(row.rank) || 999999,
-        level: parseLevel(row.level)
-      }));
+      .map(row => {
+        const karma = parseInt(row.karma) || 0;
+        totalKarma += karma;
+        return {
+          fullName: row.full_name || 'Unknown',
+          muid: row.muid || '-',
+          karma: karma,
+          rank: parseInt(row.rank) || 999999,
+          level: parseLevel(row.level)
+        };
+      });
 
     // Sort by rank ascending
     students.sort((a, b) => a.rank - b.rank);
@@ -87,6 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Refresh GSAP ScrollTrigger to account for the newly added DOM height
     if (window.ScrollTrigger) {
       ScrollTrigger.refresh();
+    }
+
+    // Update Total Karma
+    const totalKarmaEl = document.getElementById('stats-total-karma');
+    if (totalKarmaEl && window.animateCountUp) {
+      totalKarmaEl.innerText = totalKarma;
+      window.animateCountUp(totalKarmaEl);
     }
   }
 
