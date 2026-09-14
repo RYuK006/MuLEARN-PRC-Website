@@ -186,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 16);
   };
+  window.animateCountUp = animateCountUp;
 
   // Simple IntersectionObserver to trigger animations when leaderboard is in view
   const leaderboardTable = document.querySelector('.leaderboard-table');
