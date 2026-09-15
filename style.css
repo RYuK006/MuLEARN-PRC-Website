@@ -1613,6 +1613,7 @@ body {
 .member-card:hover,
 .more-members-card:hover,
 .photo-frame:hover,
+.voice-card:hover,
 .pillar-card:hover,
 .event-card:hover {
   border-color: var(--color-primary) !important;
