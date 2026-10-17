@@ -127,7 +127,9 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
 .video-overlay {
@@ -1565,11 +1567,11 @@ body {
 
   /* Video Background */
   .canvas-background-container {
-    background-color: var(--color-bg-page-solid);
+    background-color: var(--color-bg-page);
   }
   .scroll-canvas {
-    object-fit: contain;
-    object-position: center top;
+    object-fit: cover;
+    object-position: center;
   }
 
   /* Footer */
