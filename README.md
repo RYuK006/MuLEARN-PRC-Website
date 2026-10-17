@@ -67,7 +67,7 @@ The website is built with vanilla HTML, CSS, and JavaScript for maximum performa
 ### 🎨 **Visual Design**
 
 - **Dual Theme:** Light and dark mode with smooth transitions
-- **Video Background:** Scroll-scrubbing video that responds to page scroll position
+- **Video Background:** Autonomous 16s forward-and-reverse (ping-pong) looping video with responsive 9:16 mobile framing and desktop cover cropping
 - **Glassmorphism:** Frosted glass cards with backdrop blur effects
 - **Animated Blobs:** Floating purple gradient blobs for visual depth
 - **Responsive Layout:** Mobile-first design that works seamlessly on all screen sizes
@@ -134,7 +134,7 @@ The website is built with vanilla HTML, CSS, and JavaScript for maximum performa
 MuLEARN-PRC-Website/
 ├── index.html              # Main HTML structure with semantic sections
 ├── style.css               # Complete styling with light/dark themes
-├── app.js                  # Core app logic: theme toggle, navigation, video scrubbing
+├── app.js                  # Core app logic: theme toggle, navigation, continuous background video
 ├── execom.js               # Member card generation from CSV
 ├── leaderboard.js          # Leaderboard table rendering from CSV
 ├── gallery.js              # Dynamic gallery infinite scroll from CSV
@@ -168,7 +168,7 @@ MuLEARN-PRC-Website/
 |------|---------|
 | `index.html` | Semantic HTML structure with all sections and dynamic containers |
 | `style.css` | 1000+ lines of CSS with design tokens, animations, responsive grid |
-| `app.js` | Theme management, scroll video scrubbing, navigation active states |
+| `app.js` | Theme management, continuous background video loop, navigation active states |
 | `execom.js` | Fetches member CSV from Google Sheets, renders card grid dynamically |
 | `leaderboard.js` | Parses karma leaderboard CSV, sorts by rank, renders table with avatars |
 | `gallery.js` | Loads gallery URLs from Google Sheets, creates three infinite scroll tracks |
@@ -290,21 +290,17 @@ The site uses CSS custom properties (variables) with a `data-theme` attribute fo
 
 Toggle is persisted to `localStorage` and synced across all theme toggles on the page.
 
-### Video Scrubbing Animation
+### Background Video Ping-Pong Loop
 
-Using GSAP ScrollTrigger, the background video plays based on scroll position:
+The background video plays autonomously without requiring scroll interaction, smoothly ping-ponging forward and in reverse in a seamless loop:
 
-```javascript
-gsap.to(video, {
-  currentTime: 9.9,  // Match video duration
-  scrollTrigger: {
-    trigger: document.body,
-    start: "top top",
-    end: "bottom bottom",
-    scrub: 1  // Smooth 1-second lag
-  }
-});
+```html
+<video id="scrollVideo" class="scroll-canvas" autoplay loop muted playsinline preload="auto"></video>
 ```
+
+- **Phones (Portrait):** Displays full 9:16 vertical aspect ratio.
+- **Laptops & Desktops:** Crops gracefully with `object-fit: cover` and centered positioning.
+- **Theme Transitions:** Automatically crossfades between light and dark theme background videos upon toggle.
 
 The site includes optimized MP4 videos for light and dark modes.
 
@@ -539,15 +535,14 @@ Since this is a static site, no build step is required:
 3. Check browser console for CORS errors (shouldn't occur with Google Sheets)
 4. Verify column names match expectations (case-sensitive)
 
-### Video not scrubbing
+### Video not playing or looping
 
-**Problem:** Background video doesn't respond to scroll
+**Problem:** Background video is paused or static
 
 **Solution:**
-1. Check that GSAP and ScrollTrigger loaded (browser console)
-2. Verify video file exists at `assets/Lightmode/Lightmode_smooth.mp4`
-3. Check browser supports `currentTime` scrubbing (all modern browsers do)
-4. Try disabling ad blockers (may block video loading)
+1. Check that autoplay policies allow muted autoplay (`video.muted = true`)
+2. Verify video files exist at `assets/Lightmode/Lightmode_smooth.mp4` and `assets/Darkmode/Darkmode_smooth.mp4`
+3. Check browser console for video decoding or file access errors
 
 ### Photos not loading in cards/leaderboard
 
