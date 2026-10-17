@@ -205,78 +205,27 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(leaderboardTable);
   }
 
-  // --- Canvas Image Sequence Logic with GSAP ---
-  // --- Background Video Scrubbing (Tutorial Method) ---
+  // --- Continuous Background Video Looping (Ping-Pong Playback) ---
   const video = document.getElementById('scrollVideo');
   
-  if (video && window.gsap && window.ScrollTrigger) {
-    gsap.registerPlugin(ScrollTrigger);
-
-    let scrollTween;
-    let currentBlobUrl = null;
-
-    const initScrollScrub = () => {
-      // The exact duration of both Lightmode and Darkmode videos is 10 seconds.
-      // By hardcoding this (like the tutorial does), we completely bypass the Chromium Infinity 
-      // duration bug and avoid the Edge crash hacks.
-      // We set it to 9.9 instead of exactly 10.0 to ensure the player never hits EOF (End of File)
-      // which can cause playback freezing when scrolling to the very bottom.
-      const videoDuration = 9.9; 
-
-      if (scrollTween) {
-        scrollTween.kill();
-      }
-
-      scrollTween = gsap.to(video, {
-        currentTime: videoDuration,
-        ease: "none",
-        scrollTrigger: {
-          trigger: document.body,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 1, // Tutorial uses 1 for maximum smoothness
-        }
-      });
-      
-      ScrollTrigger.refresh();
-    };
-
-    const loadVideoForTheme = async (theme) => {
+  if (video) {
+    const loadVideoForTheme = (theme) => {
       const folder = theme === 'dark' ? 'Darkmode' : 'Lightmode';
       const videoPath = `assets/${folder}/${folder}_smooth.mp4`;
       
-      try {
-        const response = await fetch(videoPath);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+      // Smooth crossfade on theme change
+      video.style.opacity = '0';
+      setTimeout(() => {
+        video.src = videoPath;
+        video.load();
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(err => {
+            console.log("Autoplay notification:", err);
+          });
         }
-        const blob = await response.blob();
-        
-        if (currentBlobUrl) {
-          URL.revokeObjectURL(currentBlobUrl);
-        }
-        
-        currentBlobUrl = URL.createObjectURL(blob);
-        video.src = currentBlobUrl;
-        video.load(); // Explicit load call often required by Edge/Safari for Blobs
-        
-        const setupScrub = () => {
-          video.onloadedmetadata = null;
-          video.onloadeddata = null;
-          video.pause();
-          initScrollScrub();
-        };
-
-        // If metadata is already loaded, setup immediately, else wait for event
-        if (video.readyState >= 1) { 
-          setupScrub();
-        } else {
-          video.onloadedmetadata = setupScrub;
-          video.onloadeddata = setupScrub; // Fallback
-        }
-      } catch (err) {
-        console.error("Failed to load video:", err);
-      }
+        video.style.opacity = '1';
+      }, 200);
     };
 
     // Initialize with current theme
@@ -286,11 +235,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Listen for theme changes from the toggle buttons
     window.addEventListener('themeChanged', (e) => {
       loadVideoForTheme(e.detail);
-    });
-
-    // Refresh ScrollTrigger on load
-    window.addEventListener('load', () => {
-      ScrollTrigger.refresh();
     });
   }
 
